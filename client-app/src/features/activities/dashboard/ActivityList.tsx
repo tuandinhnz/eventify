@@ -5,15 +5,11 @@ import { Button, Item, Label, Segment } from 'semantic-ui-react';
 import { Activity } from '../../../app/models/activity';
 import { useStore } from '../../../app/stores/store';
 
-interface Props {
-  activities: Activity[];
-}
-
-const ActivityList = ({ activities }: Props) => {
+const ActivityList = () => {
   const [target, setTarget] = useState('');
 
   const { activityStore } = useStore();
-  const { isLoading, deleteActivity } = activityStore;
+  const { isLoading, activitiesByDate, deleteActivity } = activityStore;
 
   const handleActivityDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>, id: string) => {
     setTarget(e.currentTarget.name);
@@ -22,7 +18,7 @@ const ActivityList = ({ activities }: Props) => {
   return (
     <Segment>
       <Item.Group>
-        {activities.map((activity) => (
+        {activitiesByDate.map((activity) => (
           <Item key={activity.id}>
             <Item.Content>
               <Item.Header as='a'>{activity.title}</Item.Header>

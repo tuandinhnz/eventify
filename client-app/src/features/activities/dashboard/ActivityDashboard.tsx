@@ -7,18 +7,14 @@ import ActivityDetails from '../details/ActivityDetails';
 import ActivityForm from '../form/ActivityForm';
 import ActivityList from './ActivityList';
 
-interface Props {
-  activities: Activity[];
-}
-
-const ActivityDashboard = ({ activities }: Props) => {
+const ActivityDashboard = () => {
   const { activityStore } = useStore();
   const { selectedActivity, editMode } = activityStore;
 
   return (
     <Grid>
       <Grid.Column width='10'>
-        <ActivityList activities={activities} />
+        <ActivityList />
       </Grid.Column>
       <Grid.Column width='6'>
         {selectedActivity && !editMode && <ActivityDetails />}
