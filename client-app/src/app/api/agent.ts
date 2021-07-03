@@ -29,8 +29,7 @@ const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 //Create a requests object to hold axios templates
 const requests = {
   get: <T>(url: string) => axios.get<T>(url).then(responseBody),
-  post: <T>(url: string, body: {}) =>
-    axios.post<T>(url, body).then(responseBody),
+  post: <T>(url: string, body: {}) => axios.post<T>(url, body).then(responseBody),
   put: <T>(url: string, body: {}) => axios.put<T>(url, body).then(responseBody),
   delete: <T>(url: string) => axios.delete<T>(url).then(responseBody),
 };
@@ -40,8 +39,7 @@ const Activities = {
   list: () => requests.get<Activity[]>('/activities'),
   details: (id: string) => requests.get<void>(`/Activities/${id}`),
   create: (activity: Activity) => requests.post<void>('/Activities', activity),
-  update: (activity: Activity) =>
-    requests.put<void>(`Activities/${activity.id}`, activity),
+  update: (activity: Activity) => requests.put<void>(`Activities/${activity.id}`, activity),
   delete: (id: string) => requests.delete<void>(`/Activities/${id}`),
 };
 
