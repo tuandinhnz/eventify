@@ -37,7 +37,7 @@ const requests = {
 //Activities object hold api calls for CRUD operations
 const Activities = {
   list: () => requests.get<Activity[]>('/activities'),
-  details: (id: string) => requests.get<void>(`/Activities/${id}`),
+  details: (id: string) => requests.get<Activity>(`/Activities/${id}`),
   create: (activity: Activity) => requests.post<void>('/Activities', activity),
   update: (activity: Activity) => requests.put<void>(`Activities/${activity.id}`, activity),
   delete: (id: string) => requests.delete<void>(`/Activities/${id}`),
