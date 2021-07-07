@@ -12,6 +12,7 @@ const NavBar = () => {
           Eventify
         </Menu.Item>
         <MenuItem as={NavLink} name='Activities' to='/activities' />
+        <MenuItem as={NavLink} name='Errors' to='/errors' />
         <Menu.Item>
           <Button as={NavLink} to='/createActivity' positive content='Create Activity' />
         </Menu.Item>
