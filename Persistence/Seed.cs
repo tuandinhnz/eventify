@@ -3,13 +3,32 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
+            //Check if we have any users in the database, if not add users
+            if (!userManager.Users.Any())
+            {
+                var users = new List<AppUser>
+                {
+                    new AppUser {DisplayName = "Bob", UserName = "bob", Email = "bob@test.com"},
+                    new AppUser {DisplayName = "Tom", UserName = "tom", Email = "tom@test.com"},
+                    new AppUser {DisplayName = "Jane", UserName = "jane", Email = "jane@test.com"}
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                    /*For the CreateAsync method, we don't need to use SaveChanges because this method will create
+                     user directly in the database*/
+                }
+
+            }
             //Check if we have any activities in the database. If we have activities in the database, return and do nothing.
             if (context.Activities.Any()) return;
             
