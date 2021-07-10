@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { history } from '../..';
 import { Activity } from '../models/activity';
 import { store } from '../stores/store';
+import { User, UserFormValue } from '../models/user';
 
 //create a function to delay the response by the certain amount of time
 const sleep = (delay: number) => {
@@ -14,6 +15,14 @@ const sleep = (delay: number) => {
 };
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
+
+// Adding the API token to axios requests (every request)
+
+axios.interceptors.request.use((config) => {
+  const token = store.commonStore.token;
+  if (token) config.headers.Authorization = `Bearer ${token}`;
+  return config;
+});
 
 // delay all responses by 1000 ms to test the loading indicator functionality.
 axios.interceptors.response.use(
@@ -78,8 +87,15 @@ const Activities = {
   delete: (id: string) => requests.delete<void>(`/Activities/${id}`),
 };
 
+const Account = {
+  current: () => requests.get<User>('/account'),
+  login: (user: UserFormValue) => requests.post<User>('/account/login', user),
+  register: (user: UserFormValue) => requests.post<User>('/account/register', user),
+};
+
 const agent = {
   Activities,
+  Account,
 };
 
 export default agent;

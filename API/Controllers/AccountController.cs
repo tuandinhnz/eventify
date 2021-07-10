@@ -35,7 +35,7 @@ namespace API.Controllers
             /*The FindByEmailAsync method will return the user object whose email
             is associated with the NormaliseEmail value in the database or it will return null if
             the supplied email does not match with any NormaliseEmail in the database */
-            if (userDb == null) return Unauthorized();
+            if (userDb == null) return Unauthorized("Username is incorrect");
 
             var result = await _signInManager.CheckPasswordSignInAsync(userDb, loginDto.Password, false);
 
@@ -54,12 +54,14 @@ namespace API.Controllers
 
             if (await _userManager.Users.AnyAsync(x => x.Email == registerDto.Email))
             {
-                return BadRequest("Email taken");
+                ModelState.AddModelError("email", "Email taken");
+                return ValidationProblem(ModelState);
             }
 
             if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
             {
-                return BadRequest("Username taken");
+                ModelState.AddModelError("username", "Username taken");
+                return ValidationProblem(ModelState);
             }
 
             var user = new AppUser
