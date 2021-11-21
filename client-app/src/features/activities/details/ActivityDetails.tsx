@@ -14,7 +14,11 @@ interface Params {
 }
 const ActivityDetails = () => {
   const { activityStore } = useStore();
-  const { selectedActivity: activity, loadActivity, loadingInitial } = activityStore;
+  const {
+    selectedActivity: activity,
+    loadActivity,
+    loadingInitial,
+  } = activityStore;
 
   const { id } = useParams<Params>();
 
@@ -22,7 +26,8 @@ const ActivityDetails = () => {
     if (id) loadActivity(id);
   }, [id, loadActivity]);
 
-  if (loadingInitial || !activity) return <LoadingComponent content='Loading' />;
+  if (loadingInitial || !activity)
+    return <LoadingComponent content="Loading" />;
 
   return (
     <Grid>
@@ -32,7 +37,7 @@ const ActivityDetails = () => {
         <ActivityDetailedChat />
       </Grid.Column>
       <Grid.Column width={6}>
-        <ActivityDetailedSidebar />
+        <ActivityDetailedSidebar activity={activity} />
       </Grid.Column>
     </Grid>
   );

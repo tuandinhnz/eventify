@@ -20,6 +20,8 @@ namespace Application.Activities
 
         public string Venue { get; set; }
 
+        public bool IsCancelled { get; set; }
+
         public string HostUsername { get; set; }
 
         public ICollection<Profile> Attendees { get; set; }

@@ -31,13 +31,13 @@ function App() {
     }
   }, [commonStore, userStore, getUser, setAppLoaded, token]);
 
-  if (!appLoaded) return <LoadingComponent content='Loading App ...' />;
+  if (!appLoaded) return <LoadingComponent content="Loading App ..." />;
 
   return (
     <>
-      <ToastContainer position='bottom-right' hideProgressBar />
+      <ToastContainer position="bottom-right" hideProgressBar />
       <ModalContainer />
-      <Route path='/' exact component={HomePage} />
+      <Route path="/" exact component={HomePage} />
       <Route
         //the path below matches anything after /
         path={'/(.+)'}
@@ -46,12 +46,12 @@ function App() {
             <NavBar />
             <Container style={{ marginTop: '7em' }}>
               <Switch>
-                <Route exact path='/activities' component={ActivityDashboard} />
-                <Route path='/activities/:id' component={ActivityDetails} />
+                <Route exact path="/activities" component={ActivityDashboard} />
+                <Route path="/activities/:id" component={ActivityDetails} />
                 <Route key={location.key} path={['/manage/:id', '/createActivity']} component={ActivityForm} />
-                <Route path='/errors' component={TestErrors} />
-                <Route path='/server-error' component={ServerError} />
-                <Route path='/login' component={LoginForm} />
+                <Route path="/errors" component={TestErrors} />
+                <Route path="/server-error" component={ServerError} />
+                <Route path="/login" component={LoginForm} />
                 <Route component={NotFound} />
               </Switch>
             </Container>

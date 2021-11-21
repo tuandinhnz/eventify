@@ -11,10 +11,10 @@ interface Props {
 const ActivityDetailedInfo = ({ activity }: Props) => {
   return (
     <Segment.Group>
-      <Segment attached='top'>
+      <Segment attached="top">
         <Grid>
           <Grid.Column width={1}>
-            <Icon size='large' color='teal' name='info' />
+            <Icon size="large" color="teal" name="info" />
           </Grid.Column>
           <Grid.Column width={15}>
             <p>{activity.description}</p>
@@ -22,9 +22,9 @@ const ActivityDetailedInfo = ({ activity }: Props) => {
         </Grid>
       </Segment>
       <Segment attached>
-        <Grid verticalAlign='middle'>
+        <Grid verticalAlign="middle">
           <Grid.Column width={1}>
-            <Icon name='calendar' size='large' color='teal' />
+            <Icon name="calendar" size="large" color="teal" />
           </Grid.Column>
           <Grid.Column width={15}>
             <span>{format(activity.date!, 'dd MMM yyyy h:mm aa')}</span>
@@ -32,9 +32,9 @@ const ActivityDetailedInfo = ({ activity }: Props) => {
         </Grid>
       </Segment>
       <Segment attached>
-        <Grid verticalAlign='middle'>
+        <Grid verticalAlign="middle">
           <Grid.Column width={1}>
-            <Icon name='marker' size='large' color='teal' />
+            <Icon name="marker" size="large" color="teal" />
           </Grid.Column>
           <Grid.Column width={11}>
             <span>

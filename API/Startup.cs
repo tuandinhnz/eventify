@@ -57,14 +57,27 @@ namespace API
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            
+            // Look for files inside the wwwroot folder
+            app.UseDefaultFiles();
+            
+            // Serve static files from the wwwroot folder
+            app.UseStaticFiles();
+            
             app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
 
             app.UseAuthorization();
 
-            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                
+                // All other routes other than /api will be routed to the Fallback controller
+                endpoints.MapFallbackToController("Index", "Fallback");
+                
+            });
         }
     }
 }

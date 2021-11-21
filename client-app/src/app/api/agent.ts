@@ -3,7 +3,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 import { toast } from 'react-toastify';
 import { history } from '../..';
-import { Activity } from '../models/activity';
+import { Activity, ActivityFormValues } from '../models/activity';
 import { store } from '../stores/store';
 import { User, UserFormValue } from '../models/user';
 
@@ -14,7 +14,7 @@ const sleep = (delay: number) => {
   });
 };
 
-axios.defaults.baseURL = 'http://localhost:5000/api';
+axios.defaults.baseURL = process.env.REACT_APP_API_URL;
 
 // Adding the API token to axios requests (every request)
 
@@ -27,7 +27,9 @@ axios.interceptors.request.use((config) => {
 // delay all responses by 1000 ms to test the loading indicator functionality.
 axios.interceptors.response.use(
   async (response) => {
-    await sleep(1000);
+    if (process.env.NODE_ENV === 'development') {
+      await sleep(1000);
+    }
     return response;
   },
   (error: AxiosError) => {
@@ -82,9 +84,10 @@ const requests = {
 const Activities = {
   list: () => requests.get<Activity[]>('/activities'),
   details: (id: string) => requests.get<Activity>(`/Activities/${id}`),
-  create: (activity: Activity) => requests.post<void>('/Activities', activity),
-  update: (activity: Activity) => requests.put<void>(`Activities/${activity.id}`, activity),
+  create: (activity: ActivityFormValues) => requests.post<void>('/Activities', activity),
+  update: (activity: ActivityFormValues) => requests.put<void>(`Activities/${activity.id}`, activity),
   delete: (id: string) => requests.delete<void>(`/Activities/${id}`),
+  attend: (id: string) => requests.post<void>(`/activities/${id}/attend`, {}),
 };
 
 const Account = {
