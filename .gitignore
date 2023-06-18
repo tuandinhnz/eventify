@@ -8,3 +8,4 @@ appsettings.json
 .idea/.idea.Bloggy/.idea/*
 .DS_Store
 API/Properties/launchSettings.json
+API/Dockerfile
