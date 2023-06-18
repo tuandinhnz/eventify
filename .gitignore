@@ -9,3 +9,5 @@ appsettings.json
 .DS_Store
 API/Properties/launchSettings.json
 API/Dockerfile
+API/appsettings.Development.json
+API/appsettings.json
