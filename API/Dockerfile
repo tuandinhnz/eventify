@@ -28,6 +28,6 @@ COPY --from=build-env /app/Domain/bin/Release/net5.0 .
 COPY --from=build-env /app/Infrastructure/bin/Release/net5.0 .
 COPY --from=build-env /app/Persistence/bin/Release/net5.0 .
 ENV APSNETCORE_ENVIRONMENT="Production"
-ENV DATABASE_URL="Server=galaxy-dev-database.culvc7phnaos.ap-southeast-2.rds.amazonaws.com;Port=5432;User Id=postgres;Password=Hoian231987$;Database=eventify; SSL Mode=Require; Trust Server Certificate=true"
+ENV DATABASE_URL="connection string"
 EXPOSE 80
 ENTRYPOINT ["dotnet", "API.dll"]
